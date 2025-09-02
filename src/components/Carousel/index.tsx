@@ -6,7 +6,7 @@
  * @lastEditTime: 
  */
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./index.module.scss";
+import styles from "@/components/Carousel/index.module.scss";
 import { debounce } from "lodash";
 
 interface CarouselProps {
@@ -80,15 +80,15 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [currentIndex]);
 
   useEffect(() => {
-    let timeoutId;
+    let timeoutId: ReturnType<typeof setTimeout>;
     if (innerAutoPlay) {
-      function tick() {
+      const tick = (): void => {
         setCurrentIndex((prev) => {
           goToSlide(prev + 1);
           return prev + 1;
         });
         timeoutId = setTimeout(tick, defaultAnimationTime * 1000 + 50); // 每次设置新的定时器
-      }
+      };
       tick(); // 启动
     }
     return () => clearTimeout(timeoutId); // 清理
@@ -127,7 +127,11 @@ const Carousel: React.FC<CarouselProps> = ({
   );
 };
 
-const AnimationCarousel = ({ items, animationTime }) => {
+interface AnimationCarouselProps {
+  items: { element: React.ReactNode; width: number }[];
+  animationTime: number;
+}
+const AnimationCarousel:React.FC<AnimationCarouselProps> = ({ items, animationTime }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!contentRef.current) return;

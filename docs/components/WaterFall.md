@@ -1,6 +1,6 @@
 ---
-title: 组件
-order: 2 <!-- order 越小越靠前，默认为 0 -->
+title: 瀑布流
+order: 2
 ---
 
 # 瀑布流

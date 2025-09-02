@@ -8,9 +8,11 @@
 import { defineConfig } from 'dumi';
 
 export default defineConfig({
+  base: '/interestingWeb-dumi/', // 由于 GitHub Pages 是非域名根路径部署, base 和 publicPath 配置项需改为 仓库名称
+  publicPath: '/interestingWeb-dumi/',
   outputPath: 'docs-dist',
   themeConfig: {
-    name: 'interestringWeb',
-    logo: '/logo.png',
+    name: 'IW',
+    logo: '/interestingWeb-dumi/logo.png',
   },
 });

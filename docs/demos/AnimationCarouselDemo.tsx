@@ -5,8 +5,11 @@
  * @lastEditors: fengli
  * @lastEditTime:
  */
-import { AnimationCarousel } from '@/Carousel';
+import { AnimationCarousel } from '@/components/Carousel';
 import React from 'react';
+import img1 from './images/1.jpg';
+import img2 from './images/2.jpg';
+import img3 from './images/3.jpg';
 
 const AnimationCarouselDemo: React.FC = () => {
   return (
@@ -18,7 +21,7 @@ const AnimationCarouselDemo: React.FC = () => {
             width: '400',
             element: (
               <img
-                src="/images/1.jpg"
+                src={img1}
                 style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
             ),
@@ -27,7 +30,7 @@ const AnimationCarouselDemo: React.FC = () => {
             width: '400',
             element: (
               <img
-                src="/images/2.jpg"
+                src={img2}
                 style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
             ),
@@ -36,7 +39,7 @@ const AnimationCarouselDemo: React.FC = () => {
             width: '400',
             element: (
               <img
-                src="/images/3.jpg"
+                src={img3}
                 style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
             ),
