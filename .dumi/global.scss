@@ -1,0 +1,52 @@
+@use "./styles/themes/_variables.scss";
+@use "./styles/themes/light.scss";
+@use "./styles/themes/dark.scss";
+@use "./styles/themes/blue.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  font-size: clamp(12px, 2.5vw, 16px);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+}
+/* 全局滚动条样式 */
+html {
+  scrollbar-width: auto; /* Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.4) transparent; /*  */
+}
+
+/* View Transitions 动画 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  clip-path: circle(0% at 100% 0%); /* 从右上角开始 */
+  animation: expandClip 0.6s ease-in-out forwards;
+}
+
+@keyframes expandClip {
+  to {
+    clip-path: circle(150% at 100% 0%);
+  }
+}
+
+/* mdx中代码块渲染 */
+pre {
+  white-space: pre; // 保留格式（不换行）
+  overflow-x: auto; // 横向滚动条只出现在代码块中
+  max-width: 100%; // 防止超出容器
+}
+
+code {
+  white-space: inherit;
+}
