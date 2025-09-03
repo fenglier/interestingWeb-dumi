@@ -43,3 +43,5 @@ $ pnpm run doctor
 ## LICENSE
 
 MIT
+
+测试自动化部署
