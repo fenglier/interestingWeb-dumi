@@ -1,5 +1,5 @@
 {
-  "name": "interestringWeb",
+  "name": "interestingWeb",
   "version": "0.0.1",
   "description": "记录有趣的前端组件、样式、布局、特效。",
   "module": "dist/index.js",

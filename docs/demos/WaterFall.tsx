@@ -6,14 +6,15 @@
  * @lastEditTime: 
  */
 
-import WaterFall from "@/components/WaterFall";
+import {WaterFall} from "interestingWeb";
 import data1 from "./data1.json";
 import data2 from "./data2.json";
 
 export  const WaterFallDemo = () => {
   const getData = async (source) => {
     if (source > 2) {
-      throw new Error("Invalid data source");
+      // throw new Error("Invalid data source");
+      // return [];
     }
     /* 模拟页面加载是获取数据 */
     const colorArr = ["#cdb4db", "#ffc8dd", "#ffafcc", "#bde0fe", "#a2d2ff"];

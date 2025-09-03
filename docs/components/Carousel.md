@@ -1,10 +1,41 @@
 ---
 title: 轮播图
 order: 1
+demo:
+  cols: 2
 ---
 
-
 # 轮播图
+
+## 使用场景
+
+TODO
+
+## 代码演示
+
+<!-- prettier-ignore -->
+<code src="../demos/CarouselDemo.tsx"></code>
+<code src="../demos/AnimationCarouselDemo.tsx"></code>
+
+## API
+
+### Carousel API
+
+参数|说明|类型|默认值
+---|---|---|---
+autoPlay|是否自动播放|boolean|true
+width|每个元素的宽度|number|50
+defaultAnimationTime|切换元素时，动画时间|number| 1（1s的意思）
+
+### AnimationCarousel API
+
+参数|说明|类型|默认值
+---|---|---|---
+animationTime|动画时间|number|-
+items|元素集合| { element: React.ReactNode; width: number }[]|-
+
+
+## 原理
 
 这是一个简单的轮播图组件，用于展示多个项目。它支持自动轮播、左右切换等功能。
 
@@ -30,10 +61,3 @@ order: 1
     </li>
   </ol>
 </div>
-
----
-
-<code src="../demos/CarouselDemo.tsx"></code>
-
-
-<code src="../demos/AnimationCarouselDemo.tsx"></code>

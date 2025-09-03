@@ -1,11 +1,11 @@
 /*
  * @Author: fengli
- * @Description:
+ * @Description: 
  * @Date: 2025-09-02 11:10:53
  * @lastEditors: fengli
- * @lastEditTime:
+ * @lastEditTime: 
  */
-import { AnimationCarousel } from '@/components/Carousel';
+import { AnimationCarousel } from 'interestingWeb';
 import React from 'react';
 import img1 from './images/1.jpg';
 import img2 from './images/2.jpg';

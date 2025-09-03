@@ -3,10 +3,17 @@ title: 树形组件
 order: 4 
 ---
 
-采用HashMap和树的嵌套对象实现
+## 树形组件
+
+## 使用场景
+
+TODO
+
+## 代码演示
 
 ```tsx
-import Tree from "@/components/Tree/index.tsx";
+import {Tree} from "interestingWeb";
+import React from 'react';
 const TreeDemo = () => {
   const data = [
     {
@@ -45,3 +52,13 @@ const TreeDemo = () => {
 };
 export default TreeDemo
 ```
+
+## API
+
+参数|说明|类型|默认值
+---|---|---|---
+data|数据源| Arrary|-
+onChange|点击选中节点时的回调| (checkNode: { expand?: boolean;  check: NodeCheckState;  label: string;  value: string;  id: string;  parent: string;  children?: InnerTreeNode[];}, currentTree: InnerTreeNode[]) => void|-
+
+
+## 实现原理
