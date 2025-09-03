@@ -5,9 +5,9 @@
  * @lastEditors: fengli
  * @lastEditTime:
  */
-import { useRef, useState } from "react";
-import style from "./index.module.scss";
-import { flushSync } from "react-dom";
+import React, { useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
+import style from './index.module.scss';
 
 interface ImagePreviewProps {
   src: string;
@@ -20,8 +20,8 @@ const ANIMATION_TIME = 0.3;
 
 const ImagePreview: React.FC<ImagePreviewProps> = ({ src, alt, width }) => {
   const [zoomed, setZoomed] = useState(false);
-  const [transform, setTransform] = useState("");
-  const preTransfromRef = useRef("");
+  const [transform, setTransform] = useState('');
+  const preTransfromRef = useRef('');
 
   const imageRef = useRef<HTMLImageElement>(null);
   const zoomedRef = useRef<HTMLImageElement>(null);
@@ -67,7 +67,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ src, alt, width }) => {
     }, ANIMATION_TIME * 1000);
   };
 
-  const handleZoomImgClick = (e) => {
+  const handleZoomImgClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
