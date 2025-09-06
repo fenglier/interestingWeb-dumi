@@ -1,15 +1,12 @@
 /*
  * @Author: fengli
- * @Description: 
+ * @Description:
  * @Date: 2025-09-02 11:10:53
  * @lastEditors: fengli
- * @lastEditTime: 
+ * @lastEditTime:
  */
 import { AnimationCarousel } from 'interestingWeb';
 import React from 'react';
-import img1 from './images/1.jpg';
-import img2 from './images/2.jpg';
-import img3 from './images/3.jpg';
 
 const AnimationCarouselDemo: React.FC = () => {
   return (
@@ -25,6 +22,9 @@ const AnimationCarouselDemo: React.FC = () => {
                 style={{ height: '100%', width: '100%', objectFit: 'cover' }}
               />
             ),
+            clickHandler: (item) => {
+              console.log('click', item);
+            },
           },
           {
             width: '400',

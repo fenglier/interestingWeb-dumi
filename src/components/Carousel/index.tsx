@@ -1,13 +1,13 @@
 /*
  * @Author: fengli
- * @Description: 
+ * @Description:
  * @Date: 2025-09-02 10:20:23
  * @lastEditors: fengli
- * @lastEditTime: 
+ * @lastEditTime:
  */
-import React, { useEffect, useRef, useState } from "react";
-import styles from "@/components/Carousel/index.module.scss";
-import { debounce } from "lodash";
+import styles from '@/components/Carousel/index.module.scss';
+import { debounce } from 'lodash';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface CarouselProps {
   children: React.ReactNode[];
@@ -104,7 +104,7 @@ const Carousel: React.FC<CarouselProps> = ({
             transform: `translateX(-${currentIndex * width}%)`,
             transition: isAnimating
               ? `transform ${defaultAnimationTime}s linear`
-              : "none",
+              : 'none',
           }}
           onTransitionEnd={handleTransitionEnd}
         >
@@ -128,10 +128,13 @@ const Carousel: React.FC<CarouselProps> = ({
 };
 
 interface AnimationCarouselProps {
-  items: { element: React.ReactNode; width: number }[];
+  items: { element: React.ReactNode; width: number; clickHandler:()=>void }[];
   animationTime: number;
 }
-const AnimationCarousel:React.FC<AnimationCarouselProps> = ({ items, animationTime }) => {
+const AnimationCarousel: React.FC<AnimationCarouselProps> = ({
+  items,
+  animationTime,
+}) => {
   const contentRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!contentRef.current) return;
@@ -144,7 +147,11 @@ const AnimationCarousel:React.FC<AnimationCarouselProps> = ({ items, animationTi
       <div className={styles.scrollContent} ref={contentRef}>
         {renderItems.map((item) => {
           return (
-            <div className={styles.item} style={{ width: `${item.width}px` }}>
+            <div
+              className={styles.item}
+              style={{ width: `${item.width}px` }}
+              onClick={() => item.clickHandler && item.clickHandler(item)}
+            >
               {item.element}
             </div>
           );

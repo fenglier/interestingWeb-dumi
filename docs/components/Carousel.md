@@ -21,19 +21,22 @@ TODO
 
 ### Carousel API
 
-参数|说明|类型|默认值
----|---|---|---
-autoPlay|是否自动播放|boolean|true
-width|每个元素的宽度|number|50
-defaultAnimationTime|切换元素时，动画时间|number| 1（1s的意思）
+| 参数                 | 说明                 | 类型    | 默认值         |
+| -------------------- | -------------------- | ------- | -------------- |
+| autoPlay             | 是否自动播放         | boolean | true           |
+| width                | 每个元素的宽度       | number  | 50             |
+| defaultAnimationTime | 切换元素时，动画时间 | number  | 1（1s 的意思） |
 
 ### AnimationCarousel API
 
-参数|说明|类型|默认值
----|---|---|---
-animationTime|动画时间|number|-
-items|元素集合| { element: React.ReactNode; width: number }[]|-
+| 参数          | 说明     | 类型                                          | 默认值 |
+| ------------- | -------- | --------------------------------------------- | ------ |
+| animationTime | 动画时间 | number                                        | -      |
+| items         | 子元素集合 | { element: React.ReactNode; width: number }[] | -      |
 
+| 方法         | 说明                   | 参数       | 返回值 |
+| ------------ | ---------------------- | ---------- | ------ |
+| clickHandler | 元素被点击时的回调函数 | 子元素本身 | -      |
 
 ## 原理
 

@@ -14,5 +14,8 @@ export default defineConfig({
   themeConfig: {
     name: 'IW',
     logo: '/interestingWeb-dumi/logo.png',
+    socialLinks: {
+      github: 'https://github.com/fenglier/interestingWeb-dumi',
+    },
   },
 });
