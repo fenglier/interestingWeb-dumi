@@ -26,7 +26,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
   height,
 }) => {
   // TODO:支持内置ALT
-  const [zoomed, setZoomed] = useState(false);
+  const [zoomed, setZoomed] = useState<boolean>(false);
   const [transform, setTransform] = useState('');
   const preTransfromRef = useRef('');
 
@@ -35,6 +35,8 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
 
   const handleClick = () => {
     if (!imageRef.current) return;
+    // 禁止背景滚动
+    document.documentElement.style.overflow = 'clip';
 
     const rect = imageRef.current.getBoundingClientRect();
 
@@ -73,6 +75,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
     setTransform(preTransfromRef.current);
     setTimeout(() => {
       setZoomed(false);
+      document.documentElement.style.overflow = '';
     }, ANIMATION_TIME * 1000);
   };
 
@@ -104,6 +107,32 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
     }
   };
 
+  const handleWheel = (e: React.WheelEvent) => {
+    if (!zoomedRef.current) return;
+    e.stopPropagation();
+    const delta = e.deltaY;
+    const currentTransform = zoomedRef.current.style.transform;
+    const scaleMatch = currentTransform.match(/scale\(([\d.]+),\s*([\d.]+)\)/);
+    let scaleX = 1;
+    let scaleY = 1;
+    if (scaleMatch) {
+      scaleX = parseFloat(scaleMatch[1]);
+      scaleY = parseFloat(scaleMatch[2]);
+    } else {
+      // 如果没有scale部分，添加scale
+      zoomedRef.current.style.transform = `${currentTransform} scale(1, 1)`;
+    }
+    const scaleFactor = delta > 0 ? 0.9 : 1.1; // 放大或缩小的比例
+    scaleX *= scaleFactor;
+    scaleY *= scaleFactor;
+    const newTransform = currentTransform.replace(
+      /scale\(([\d.]+),\s*([\d.]+)\)/,
+      `scale(${scaleX}, ${scaleY})`,
+    );
+    zoomedRef.current.style.transform = newTransform;
+  };
+  
+
   return (
     <>
       <img
@@ -131,6 +160,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
                 transition: `transform ${ANIMATION_TIME}s ease`,
                 // animation: `${style.scaleUp} 0.3s ease forwards`,
               }}
+              onWheel={handleWheel}
             />
           </div>
           <div className={style.operationContainer}>
@@ -141,11 +171,9 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
               <svg
                 viewBox="64 64 896 896"
                 focusable="false"
-                dataIcon="rotate-left"
                 width="1em"
                 height="1em"
                 fill="currentColor"
-                ariaHidden="true"
               >
                 <defs>
                   <style></style>
@@ -161,11 +189,9 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
               <svg
                 viewBox="64 64 896 896"
                 focusable="false"
-                data-icon="rotate-right"
                 width="1em"
                 height="1em"
                 fill="currentColor"
-                aria-hidden="true"
               >
                 <defs>
                   <style></style>

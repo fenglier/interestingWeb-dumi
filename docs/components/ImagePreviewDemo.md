@@ -43,5 +43,8 @@ export default ImagePreviewDemo;
 3. 放大过程带动画
 4. 背景遮罩 + 关闭按钮
 
-实现方案：使用 CSS transform + transform-origin + transition + JavaScript 控制。
-关键点：记录原图的位置（getBoundingClientRect），把模态图设置为绝对定位，从原图位置开始，使用 transform: scale(...) + transform-origin 实现平滑放大
+<p>
+实现方案：使用 CSS transform + transform-origin + transition + JavaScript 控制。关键点：记录原图的位置（getBoundingClientRect），把模态图设置为绝对定位，从原图位置开始，使用 transform: scale(...) + transform-origin 实现平滑放大。
+</p>
+
+<p>旋转的实现，是通过transform-origin: center center 设置选择中心，再在已有旋转的基础上顺时针和逆时针旋转</p>
