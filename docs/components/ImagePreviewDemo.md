@@ -3,30 +3,38 @@ title: 图片预览
 order: 7
 ---
 
-
 ## 代码演示
+
 ```tsx
-import {ImagePreview} from "interestingWeb";
-import React from 'react'
+import { ImagePreview } from 'interestingWeb';
+import React from 'react';
 
 const ImagePreviewDemo = () => {
   return (
+    <>
       <ImagePreview
         width={300}
+        height={300}
         src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
       />
+      <ImagePreview
+        width={300}
+        height={300}
+        src="https://images.pexels.com/photos/33668610/pexels-photo-33668610.jpeg"
+      />
+    </>
   );
 };
 
-export default ImagePreviewDemo
+export default ImagePreviewDemo;
 ```
 
 ## API
 
-参数|说明|类型|默认值
----|---|---|---|
-width|图片宽度|number|-
-src|图片资源|-|-
+| 参数  | 说明     | 类型   | 默认值 |
+| ----- | -------- | ------ | ------ |
+| width | 图片宽度 | number | -      |
+| src   | 图片资源 | -      | -      |
 
 ## 原理
 

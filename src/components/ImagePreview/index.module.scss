@@ -1,6 +1,10 @@
 .thumbnail {
-  /*   width: 200px; */
-  height: auto;
+  // width: 400px;
+  // height: auto;
+  object-fit: contain; /* 等比缩放，保证全部内容显示 */
+  background-color: var(
+    --color-bg-secondary
+  ); /* 容器多余部分留空，可以设置背景色 */
   cursor: zoom-in;
   border-radius: 8px;
   transition: transform 0.2s ease;
@@ -20,6 +24,45 @@
   align-items: center;
   z-index: 9999;
   animation: fadeIn 0.3s ease;
+
+  .zoomedImage {
+    position: absolute;
+    object-fit: contain; /* 等比缩放，保证全部内容显示 */
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+  }
+  // .zoomedImage.width {
+  //   width: 90vw;
+  //   height: auto;
+  // }
+}
+.operationContainer {
+  position: fixed;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: calc(50vw);
+  bottom: 2rem;
+  transform: translate(-50%);
+  z-index: 9999;
+  background-color: var(--color-bg-secondary);
+  opacity: 0.4;
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+
+  .operationItem {
+    &:hover {
+      cursor: pointer;
+      color: var(--color-primary);
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -29,22 +72,6 @@
   to {
     background-color: rgba(0, 0, 0, 0.8);
   }
-}
-
-.zoomedImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: top left;
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
-}
-.zoomedImage.width {
-  width: 90vw;
-  height: auto;
 }
 
 @keyframes scaleUp {

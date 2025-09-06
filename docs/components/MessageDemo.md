@@ -5,7 +5,6 @@ demo:
   cols: 2
 ---
 
-# 未读信息 Message
 
 ## 使用场景
 
@@ -14,13 +13,13 @@ demo:
 ## 代码演示
 
 ```tsx
-import { Message, MessageWithCount } from 'interestingWeb';
+import { Message } from 'interestingWeb';
 import React from 'react';
 const MessageDemo = () => {
   return (
     <>
       <Message />
-      <MessageWithCount count={99} />
+      <Message count={99} />
     </>
   );
 };
@@ -31,7 +30,7 @@ export default MessageDemo;
 
 | 参数  | 说明             | 类型   | 默认值 |
 | ----- | ---------------- | ------ | ------ |
-| count | 显示未读信息数量 | number | -      |
+| count | 显示未读信息数量。没有这个参数就单纯提示有未读信息 | number | -      |
 
 ## 实现原理
 

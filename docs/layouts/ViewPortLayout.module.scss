@@ -1,0 +1,8 @@
+.center {
+  position: fixed;
+  left: calc(50vw); /* 视口宽带一半 */
+  top: calc(50vh); /* 距离高度80px */
+  width: 200px;
+  background-color: var(--color-bg-secondary);
+  transform: translate(-50%, -50%); /* 左移自身宽度的一半，上移自身高度的一半 */
+}
