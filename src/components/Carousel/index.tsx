@@ -128,7 +128,11 @@ const Carousel: React.FC<CarouselProps> = ({
 };
 
 interface AnimationCarouselProps {
-  items: { element: React.ReactNode; width: number; clickHandler:()=>void }[];
+  items: {
+    element: React.ReactNode;
+    width: number;
+    clickHandler: (item: any) => void;
+  }[];
   animationTime: number;
 }
 const AnimationCarousel: React.FC<AnimationCarouselProps> = ({

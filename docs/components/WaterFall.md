@@ -5,6 +5,8 @@ order: 2
 
 ## 瀑布流
 
+适用于内容尺寸不一样时，提升信息密度。
+
 ## 代码演示
 <code src="../demos/WaterFall.tsx"></code>
 

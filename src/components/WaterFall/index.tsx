@@ -316,6 +316,7 @@ const WaterFall = ({ getData }: MasonryProps) => {
                 top={position.top}
                 left={position.left}
                 card={card}
+                
               />
             );
           } else {

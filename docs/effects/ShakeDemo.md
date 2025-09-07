@@ -11,7 +11,7 @@ order: 2
 
 ```tsx
 import React from 'react';
-import { Message, MessageWithCount, Shake } from 'interestingWeb';
+import { Message, Shake } from 'interestingWeb';
 const ShakeDemo = () => {
   return (
     <>
@@ -19,7 +19,7 @@ const ShakeDemo = () => {
         <Message />
       </Shake>
       <Shake>
-        <MessageWithCount count={100} />
+        <Message count={100} />
       </Shake>
     </>
   );
