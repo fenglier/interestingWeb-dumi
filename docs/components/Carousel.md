@@ -1,6 +1,7 @@
 ---
 title: 轮播图
 order: 1
+group: 数据展示
 demo:
   cols: 2
 ---

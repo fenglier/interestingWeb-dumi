@@ -1,0 +1,15 @@
+.colorPicker {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  &:hover {
+    border-color: var(--input-border-focus);
+  }
+}
+.colorValue {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  color: var(--color-text);
+}
