@@ -22,6 +22,7 @@ enum NodeCheckState {
 interface InnerTreeNode {
   expand?: boolean;
   check: NodeCheckState;
+  disabled: boolean; // 是否禁用
   label: string;
   value: string;
   id: string;
@@ -32,8 +33,9 @@ interface TreeProps {
   data: OuterTreeNode[];
   onChange?: (checkNode: InnerTreeNode, currentTree: InnerTreeNode[]) => void;
   checked?: string[]; // 设置节点的选中状态。如果父节点被选中，子节点部分选中，则子节点的选中设置无效，子节点会被全部选择
+  disabled?: string[]; // 设置节点的禁用状态。如果父节点被禁用，子节点部分禁用，则子节点的禁用设置无效，子节点会被全部禁用
 }
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from './index.module.scss';
 /**
  * 设置每个节点的 parent 和 id
@@ -88,7 +90,7 @@ const setUpNodeCheckState = (
     const currentNode = nodeMap.get(id);
     if (currentNode) {
       currentNode.check = NodeCheckState.CHECKED;
-      // 设置后代节点的check。父节点被选择。所有子节点，包括子节点的子节点...，都被选择。取消也一样
+      // 设置后代节点的check（disabled一样）。父节点被选择。所有子节点，包括子节点的子节点...，都被选择。取消也一样
       const setChildrenCheck = (currentNode: InnerTreeNode) => {
         currentNode.check = NodeCheckState.CHECKED;
         if (currentNode.children) {
@@ -137,7 +139,36 @@ const setUpNodeCheckState = (
   });
 };
 
-const useTreeNode = (data: OuterTreeNode[], checked: string[] = []): any[] => {
+const setUpNodeDisabledState = (
+  nodeMap: Map<string, InnerTreeNode>,
+  disabled: string[],
+) => {
+  if (nodeMap.size === 0) return;
+  disabled.forEach((id) => {
+    const currentNode = nodeMap.get(id);
+    if (currentNode) {
+      currentNode.disabled = true;
+      // 设置后代节点的disabled。父节点被disabled。所有子节点，包括子节点的子节点...，都被disabled。
+      const setChildrenDisabled = (currentNode: InnerTreeNode) => {
+        currentNode.disabled = true;
+        if (currentNode.children) {
+          currentNode.children.forEach((item: InnerTreeNode) => {
+            setChildrenDisabled(item);
+          });
+        }
+      };
+      (currentNode.children ?? []).forEach((item: InnerTreeNode) => {
+        setChildrenDisabled(item);
+      });
+    }
+  });
+};
+
+const useTreeNode = (
+  data: OuterTreeNode[],
+  checked: string[] = [],
+  disabled: string[] = [],
+): any[] => {
   const [node, setNode] = useState<InnerTreeNode[]>(
     JSON.parse(JSON.stringify(data))?.map((item: OuterTreeNode) =>
       generateParentAndId(item, undefined),
@@ -169,16 +200,19 @@ const useTreeNode = (data: OuterTreeNode[], checked: string[] = []): any[] => {
     });
     nodeMap.current = map;
     setUpNodeCheckState(map, checked);
-  }, [data, checked]);
+    setUpNodeDisabledState(map, disabled);
+  }, [data, checked, disabled]);
   return [node, nodeMap, setNode];
 };
 const defaultChecked: string[] = [];
+const defaultDisabled: string[] = [];
 const Tree: React.FC<TreeProps> = ({
   data,
   checked = defaultChecked,
+  disabled = defaultDisabled,
   onChange,
 }) => {
-  const [node, nodeMap, setNode] = useTreeNode(data, checked);
+  const [node, nodeMap, setNode] = useTreeNode(data, checked, disabled);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, id } = e.target;
     /* 查询当前节点，并设置它的check */
@@ -187,14 +221,18 @@ const Tree: React.FC<TreeProps> = ({
       ? NodeCheckState.CHECKED
       : NodeCheckState.UNCHECKED;
 
-    /* 设置后代节点的check。父节点被选择。所有子节点，包括子节点的子节点...，都被选择。取消也一样 */
+    /*
+     * 设置后代节点的check。父节点被选择。所有子节点，包括子节点的子节点...，都被选择。取消也一样
+     * 但是，当子节点为disabled时，不设置子孙节点。
+     */
     const setChildrenCheck = (currentNode: InnerTreeNode) => {
       currentNode.check = checked
         ? NodeCheckState.CHECKED
         : NodeCheckState.UNCHECKED;
       if (currentNode.children) {
         currentNode.children.forEach((item: InnerTreeNode) => {
-          setChildrenCheck(item);
+          // 当子节点disabled为true时，不设置子孙节点
+          if (!item.disabled) setChildrenCheck(item);
         });
       }
     };
@@ -279,6 +317,7 @@ const Tree: React.FC<TreeProps> = ({
         <div key={item.value}>
           {setExpand(item)}
           <input
+            disabled={item.disabled}
             type="checkbox"
             name={item.label}
             value={item.value}
