@@ -45,8 +45,8 @@ import style from './index.module.scss';
  * @return {*}  {InnerTreeNode}
  */
 const generateParentAndId = (
-  data: OuterTreeNode,
-  parent?: OuterTreeNode,
+  data: InnerTreeNode,
+  parent?: InnerTreeNode,
 ): InnerTreeNode => {
   let tempNode: InnerTreeNode = JSON.parse(JSON.stringify(data));
   if (
@@ -55,7 +55,7 @@ const generateParentAndId = (
     (tempNode.children ?? []).length > 0
   ) {
     let children = (tempNode.children ?? []).map((item) => {
-      const newItem = generateParentAndId(item, tempNode);
+      const newItem = generateParentAndId(item , tempNode);
       return newItem;
     });
     tempNode.children = children;
@@ -170,14 +170,14 @@ const useTreeNode = (
   disabled: string[] = [],
 ): any[] => {
   const [node, setNode] = useState<InnerTreeNode[]>(
-    JSON.parse(JSON.stringify(data))?.map((item: OuterTreeNode) =>
+    JSON.parse(JSON.stringify(data))?.map((item:InnerTreeNode) =>
       generateParentAndId(item, undefined),
     ),
   );
   const nodeMap = useRef<Map<string, InnerTreeNode>>(new Map());
   useEffect(() => {
     let node: InnerTreeNode[] = JSON.parse(JSON.stringify(data))?.map(
-      (item: OuterTreeNode) => generateParentAndId(item, undefined),
+      (item: InnerTreeNode) => generateParentAndId(item, undefined),
     );
     setNode(node);
     const map = new Map<string, InnerTreeNode>();
