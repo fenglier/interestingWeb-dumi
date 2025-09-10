@@ -13,7 +13,7 @@ export default defineConfig({
   outputPath: 'docs-dist',
   themeConfig: {
     name: 'IW',
-    logo: '/interestingWeb-dumi/logo.png',
+    logo: '/interestingWeb-dumi/logo.webp',
     socialLinks: {
       github: 'https://github.com/fenglier/interestingWeb-dumi',
     },
