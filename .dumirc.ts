@@ -18,4 +18,15 @@ export default defineConfig({
       github: 'https://github.com/fenglier/interestingWeb-dumi',
     },
   },
+  metas: [
+    {
+      name: 'google-site-verification',
+      content: 'SfMpPiW0Ypn8ji_BIWJNQjtrWezIlrtcIcagxyCvJLY',
+    },
+    { name: 'keywords', content: 'interestingWeb,有趣,布局,特效,组件,样式' },
+    {
+      name: 'description',
+      content: '一个收集各种有趣的网页布局、特效、组件、样式的网站',
+    },
+  ],
 });
