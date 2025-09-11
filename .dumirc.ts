@@ -29,5 +29,4 @@ export default defineConfig({
       content: '一个收集各种有趣的网页布局、特效、组件、样式的网站',
     },
   ],
-  ssr: {},
 });

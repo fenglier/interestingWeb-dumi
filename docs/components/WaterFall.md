@@ -9,7 +9,7 @@ group: 数据展示
 适用于内容尺寸不一样时，提升信息密度。
 
 ## 代码演示
-<code src="../demos/WaterFall.tsx"></code>
+<!-- <code src="../demos/WaterFall.tsx"></code> -->
 
 ## API
 
