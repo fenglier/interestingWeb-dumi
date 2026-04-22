@@ -8,7 +8,12 @@ TODO
 ## 代码演示
 
 ```tsx
+import React from 'react';
 
+const DrawerDemo = () => {
+  return <>todo</>;
+};
+export default DrawerDemo;
 ```
 
 ## 原理

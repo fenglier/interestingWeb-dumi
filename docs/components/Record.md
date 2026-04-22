@@ -14,7 +14,11 @@ todo
 ## 代码演示
 
 ```tsx
-
+import React from 'react';
+const RecordDemo = () => {
+  return <>TODO</>;
+};
+export default RecordDemo;
 ```
 
 ## API
