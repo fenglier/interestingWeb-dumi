@@ -1,0 +1,62 @@
+/* 遮罩层样式 */
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 999;
+  backdrop-filter: blur(4px);
+}
+
+/* 抽屉基础样式 */
+.drawer {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: white;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 左侧抽屉 */
+.drawer.left {
+  border-radius: 0 8px 8px 0;
+}
+
+/* 右侧抽屉 */
+.drawer.right {
+  border-radius: 8px 0 0 8px;
+}
+
+/* 顶部抽屉 */
+.drawer.top {
+  border-radius: 0 0 8px 8px;
+  height: 50%;
+  width: 100%;
+}
+
+/* 底部抽屉 */
+.drawer.bottom {
+  border-radius: 8px 8px 0 0;
+  height: 50%;
+  width: 100%;
+}
+
+/* 添加自定义滚动条 */
+.drawer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.drawer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.drawer::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.drawer::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
