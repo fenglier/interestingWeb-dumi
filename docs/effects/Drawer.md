@@ -41,7 +41,7 @@ const DrawerDemo = () => {
         position="right"
         size={320}
         closable
-        onOverlayClick={() => setOpen(false)}
+        onClose={() => setOpen(false)}
       >
         <div>
           <h2>抽屉标题</h2>
@@ -92,7 +92,13 @@ const FullDemo = () => {
       </Drawer>
 
       {/* 右侧抽屉 */}
-      <Drawer open={rightOpen} position="right" size={400} duration={500}>
+      <Drawer
+        open={rightOpen}
+        position="right"
+        size={400}
+        duration={500}
+        onClose={() => setRightOpen(false)}
+      >
         <div>
           <h2>右侧抽屉</h2>
           <p>这是从右侧滑出的抽屉内容</p>
@@ -101,7 +107,12 @@ const FullDemo = () => {
       </Drawer>
 
       {/* 顶部抽屉 */}
-      <Drawer open={topOpen} position="top" size={200}>
+      <Drawer
+        open={topOpen}
+        position="top"
+        size={200}
+        onClose={() => setTopOpen(false)}
+      >
         <div>
           <h2>顶部抽屉</h2>
           <p>这是从顶部滑出的抽屉内容</p>
@@ -110,7 +121,12 @@ const FullDemo = () => {
       </Drawer>
 
       {/* 底部抽屉 */}
-      <Drawer open={bottomOpen} position="bottom" size={250}>
+      <Drawer
+        open={bottomOpen}
+        position="bottom"
+        size={250}
+        onClose={() => setBottomOpen(false)}
+      >
         <div>
           <h2>底部抽屉</h2>
           <p>这是从底部滑出的抽屉内容</p>
@@ -134,21 +150,11 @@ export default FullDemo;
 | position    | `'left' \| 'right' \| 'top' \| 'bottom'` | `'right'` | 抽屉位置                               |
 | children    | ReactNode                                | -         | 抽屉内容                               |
 | closable    | boolean                                  | true      | 点击遮罩层是否关闭抽屉                 |
+| onClose     | ()=>void                                 | ()=>{}    | 点击关闭的回调函数                     |
 | size        | `number \| string`                       | 320       | 抽屉宽度（左右方向）或高度（上下方向） |
 | duration    | number                                   | 300       | 抽屉过渡动画时长（毫秒）               |
 | maskClass   | string                                   | -         | 自定义遮罩层样式类名                   |
 | drawerClass | string                                   | -         | 自定义抽屉内容样式类名                 |
-
-### 事件
-
-由于使用了 Portal，事件通过 CustomEvent 触发：
-
-```tsx
-// 监听抽屉关闭事件
-window.addEventListener('drawer:close', () => {
-  console.log('抽屉已关闭');
-});
-```
 
 ## 原理
 
