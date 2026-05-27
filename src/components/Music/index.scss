@@ -1,0 +1,244 @@
+// ==================== 音乐播放器样式 ====================
+// 使用 global.less 中定义的设计系统变量
+
+// 主容器
+.music-player {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color-dark);
+  background-image: url('./musicPlayerMaterial/default_backimage.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-color-primary);
+  overflow: hidden;
+
+  /* 关键：用伪元素实现背景图透明度，不影响子元素 */
+  position: relative;
+  isolation: isolate; /* 新建层叠上下文，防止层级出错 */
+
+  // ==================== 顶部标题栏 ====================
+  .music-player-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-xl) var(--spacing-2xl);
+    flex-shrink: 0;
+
+    .header-btn {
+      all: unset;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      color: var(--text-color-primary);
+      transition: color 0.2s ease;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .header-info {
+      flex: 1;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .header-title {
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-medium);
+      margin: 0;
+      line-height: var(--line-height-tight);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .header-subtitle {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-normal);
+      margin: var(--spacing-sm) 0 0;
+      line-height: var(--line-height-tight);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text-color-secondary);
+    }
+
+    .header-description {
+      font-size: var(--font-size-lg);
+      margin: var(--spacing-xs) 0 0;
+      line-height: var(--line-height-tight);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text-color-secondary);
+    }
+  }
+
+  .music-player-turntable {
+    // width: 918px;
+    margin-top: 650px;
+    height: 202px;
+    margin-bottom: 200px;
+  }
+  .music-player-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    // ==================== 进度条区域 ====================
+    .progress-outer-wrapper {
+      position: relative;
+      margin-left: 122px;
+      margin-right: 122px;
+      padding: 10px 0px;
+      .progress-time-view {
+        padding-bottom: 10px;
+        height: 40px;
+        font-size: var(--font-size-base);
+        color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: space-between;
+      }
+      .progress-bar-container {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        height: 10px;
+        position: relative;
+        button {
+          display: none;
+
+          &.active + .progress-bar::-webkit-slider-thumb {
+            outline: 10px solid rgba(255, 255, 255, 0.3);
+          }
+        }
+
+        .progress-bar {
+          appearance: none;
+          -webkit-appearance: none;
+          // width: 1675px;
+          width: 100%;
+          height: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          background: linear-gradient(
+            to right,
+            var(--color-primary) 0%,
+            var(--color-primary) var(--progress),
+            rgba(255, 255, 255, 0.3) var(--progress),
+            rgba(255, 255, 255, 0.3) 100%
+          );
+
+          &:focus {
+            outline: none;
+          }
+
+          &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--color-primary);
+          }
+
+          &:hover {
+            &::-webkit-slider-thumb {
+              outline: 10px solid rgba(255, 255, 255, 0.3);
+            }
+          }
+        }
+      }
+    }
+
+    // ==================== 播放控制按钮区域 ====================
+    .music-player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0 40px 0;
+      flex-shrink: 0;
+      width: 100%;
+
+      .music-player-control-left {
+        position: absolute;
+        left: 122px;
+        flex-shrink: 0;
+      }
+
+      .music-player-control-middle {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        flex-shrink: 0;
+      }
+
+      .control-btn {
+        all: unset;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color-primary);
+        transition: all 0.2s ease;
+
+        border: 0;
+        height: 60px;
+        min-width: 60px;
+        text-align: center;
+        font-size: 24px;
+        cursor: pointer;
+        position: relative;
+        border-radius: 50%;
+        svg {
+          width: 20px;
+          height: 26px;
+        }
+
+        &:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+      }
+
+      .control-btn-primary {
+        border-radius: 50%;
+        background-color: var(--color-gray-medium);
+        svg {
+          width: 20px;
+          height: 26px;
+        }
+      }
+    }
+  }
+}
+
+// ==================== Base UI 焦点样式 ====================
+// 焦点状态（Base UI 会自动添加 .fe-focus 类）
+.fe-focus {
+  > .header-btn,
+  > .control-btn {
+    background: var(--color-yellow) !important;
+    color: var(--color-black) !important;
+    border-radius: 50%;
+  }
+
+  > .control-btn-primary {
+    background: var(--color-yellow) !important;
+    color: var(--color-black) !important;
+    border-radius: 50%;
+  }
+
+  > .progress-bar-container {
+    .progress-bar::-webkit-slider-thumb {
+      outline: 10px solid rgba(255, 255, 255, 0.3);
+    }
+  }
+}

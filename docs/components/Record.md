@@ -5,31 +5,42 @@ demo:
   cols: 2
 ---
 
-todo
-
 ## 使用场景
 
-显示未读信息。
+用于播放音乐
 
 ## 代码演示
 
 ```tsx
 import React from 'react';
+import { MusicPlayer } from 'interestingWeb';
+
 const RecordDemo = () => {
-  return <>TODO</>;
+  const musicInfo = {
+    title: '音三',
+    subtitle: 'Voice1',
+    description: 'First Sound Story',
+    url: '/interestingWeb-dumi/music.mp3',
+    duration: 234, // 可选，会自动从音频文件获取
+    coverUrl: '/path/to/cover.jpg', // 可选
+  };
+
+  return (
+    <MusicPlayer
+      musicInfo={musicInfo}
+      onBack={() => console.log('返回')}
+      onMore={() => console.log('更多选项')}
+      skipBackwardSeconds={10} // 可选，默认 10 秒
+      skipForwardSeconds={10} // 可选，默认 10 秒
+    />
+  );
 };
 export default RecordDemo;
 ```
 
 ## API
 
-| 参数  | 说明                                               | 类型   | 默认值 |
-| ----- | -------------------------------------------------- | ------ | ------ |
-| count | 显示未读信息数量。没有这个参数就单纯提示有未读信息 | number | -      |
-
 ## 实现原理
 
-使用伪元素::after ,'position:absolute'和 left、top 实现、
-
-1. ::after 插入的位置是内容（content）的最后面，就像你在元素末尾加了一段文字；
-2. 它的渲染位置仍在 content 区域之内；
+1. 首先需要将唱片和唱臂的不同状态，进行切图；
+2. 每 60hz 旋转一下。

@@ -1,0 +1,86 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  .player {
+    position: relative;
+    width: 918px;
+    height: 202px;
+
+    .base,
+    .record,
+    .arm {
+      position: absolute;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    .base {
+      width: 918px;
+      height: 202px;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .record {
+      width: 274px;
+      height: 68px;
+      top: 0px;
+      left: 290px;
+      z-index: 2;
+    }
+
+    .arm {
+      width: 342px;
+      height: 112px;
+      left: 380px;
+      z-index: 3;
+    }
+
+    /********************
+ 🔥 超级丝滑：音符自然飘动（无跳动、不卡顿）
+********************/
+    .noteImg {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      z-index: 4;
+      pointer-events: none;
+      animation: noteFloatSmooth linear forwards;
+      animation-iteration-count: 1;
+      will-change: transform, opacity;
+    }
+
+    @keyframes noteFloatSmooth {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 1;
+      }
+      20% {
+        transform: translateY(-60px) translateX(10px) scale(1.05);
+        opacity: 1;
+      }
+      40% {
+        transform: translateY(-120px) translateX(10px) scale(1);
+        opacity: 0.95;
+      }
+      60% {
+        transform: translateY(-180px) translateX(8px) scale(0.9);
+        opacity: 0.8;
+      }
+      80% {
+        transform: translateY(-240px) translateX(8px) scale(0.75);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-290px) translateX(0px) scale(0.6);
+        opacity: 0;
+      }
+    }
+  }
+}
